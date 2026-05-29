@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Ethereal | Modern Static Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f9fafc 0%, #eef2f7 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      color: #1e293b;
+      scroll-behavior: smooth;
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #e2e8f0;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #5b6e8c;
+    }
+
+    /* container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* header + navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 4rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      backdrop-filter: blur(2px);
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #2c3e66, #4f6f8f);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      transition: transform 0.2s ease;
+    }
+    .logo:hover {
+      transform: scale(1.02);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #334155;
+      transition: all 0.25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #3b6e8f;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: #1e4b6e;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* hero section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 5rem;
+      background: rgba(255,255,255,0.45);
+      border-radius: 3rem;
+      padding: 2rem 2rem 2rem 2.5rem;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .hero-content {
+      flex: 1.2;
+    }
+    .hero-content .badge {
+      display: inline-block;
+      background: #e6f0f5;
+      padding: 0.25rem 0.9rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #2c6282;
+      letter-spacing: 0.3px;
+      margin-bottom: 1rem;
+    }
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(125deg, #1e2a3e, #2c4c6c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #2d3a4b;
+      max-width: 90%;
+      margin-bottom: 2rem;
+    }
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.8rem;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: #2c5a74;
+      color: white;
+      box-shadow: 0 4px 8px rgba(44,90,116,0.2);
+    }
+    .btn-primary:hover {
+      background: #1f445b;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(44,90,116,0.25);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #2c5a74;
+      color: #2c5a74;
+    }
+    .btn-outline:hover {
+      background: #2c5a74;
+      color: white;
+      transform: translateY(-3px);
+    }
+    .hero-visual {
+      flex: 0.9;
+      display: flex;
+      justify-content: center;
+    }
+    .card-preview {
+      background: white;
+      border-radius: 32px;
+      padding: 1.5rem;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+      width: 260px;
+      transition: transform 0.3s;
+    }
+    .card-preview:hover {
+      transform: translateY(-6px);
+    }
+    .card-preview .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .card-preview h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .card-preview p {
+      color: #475569;
+      font-size: 0.9rem;
+    }
+
+    /* features grid */
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    .section-title span {
+      background: linear-gradient(120deg, #1e2f41, #3c627f);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0 4rem;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      background: white;
+      border-color: rgba(148,163,184,0.3);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.08);
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .feature-card p {
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    /* gallery / showcase */
+    .showcase {
+      margin: 4rem 0;
+    }
+    .cards-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .showcase-item {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      width: 280px;
+      transition: all 0.3s;
+      box-shadow: 0 12px 28px -8px rgba(0,0,0,0.08);
+    }
+    .showcase-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 32px -12px rgba(0,0,0,0.15);
+    }
+    .img-placeholder {
+      background: linear-gradient(135deg, #d9e2ec, #cbd5e1);
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #475569;
+    }
+    .showcase-item .info {
+      padding: 1.2rem;
+    }
+    .showcase-item h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+    .showcase-item p {
+      color: #5b6e8c;
+      font-size: 0.85rem;
+    }
+
+    /* testimonials */
+    .testimonial-section {
+      background: rgba(44, 90, 116, 0.04);
+      border-radius: 2rem;
+      padding: 2rem 2rem 3rem;
+      margin: 4rem 0;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-top: 2rem;
+    }
+    .testimonial {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      border: 1px solid #e9eef3;
+    }
+    .testimonial p {
+      font-style: italic;
+      color: #1e2a3a;
+      margin-bottom: 1rem;
+    }
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .avatar {
+      width: 44px;
+      height: 44px;
+      background: #b9d0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #1f4d6e;
+    }
+    .author-info strong {
+      display: block;
+      font-size: 0.9rem;
+    }
+    .author-info span {
+      font-size: 0.75rem;
+      color: #5e7a93;
+    }
+
+    /* footer */
+    .footer {
+      margin-top: 5rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.3);
+      padding-top: 2rem;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer p {
+      color: #4a617c;
+      font-size: 0.85rem;
+    }
+    .social-icons {
+      display: flex;
+      gap: 1.3rem;
+    }
+    .social-icons a {
+      text-decoration: none;
+      color: #526e8a;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .social-icons a:hover {
+      color: #1e4b6e;
+    }
+
+    /* responsive touches */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem 1rem 2.5rem;
+      }
+      .hero-content h1 {
+        font-size: 2.3rem;
+      }
+      .hero-content p {
+        max-width: 100%;
+      }
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero {
+        padding: 1.5rem;
+      }
+      .section-title {
+        font-size: 1.7rem;
+      }
+      .footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn-group {
+        width: 100%;
+      }
+      .btn {
+        text-align: center;
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- elegant navbar -->
+  <div class="navbar">
+    <div class="logo">✦ ethereal</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Explore</a>
+      <a href="#">Stories</a>
+      <a href="#">Studio</a>
+    </div>
+  </div>
+
+  <!-- hero area -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="badge">✦ design-forward experience</div>
+      <h1>Where elegance meets<br>modern simplicity.</h1>
+      <p>Immerse yourself in a serene digital space — crafted with intention, style, and seamless interaction. Discover new perspectives.</p>
+      <div class="btn-group">
+        <a href="#" class="btn btn-primary">Start journey →</a>
+        <a href="#" class="btn btn-outline">Learn more</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="card-preview">
+        <div class="icon">🌿</div>
+        <h3>Mindful design</h3>
+        <p>Soft gradients, smooth shadows, and calm transitions evoke a sense of clarity.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- features grid: why choose -->
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">✨</div>
+      <h3>Timeless aesthetics</h3>
+      <p>Carefully balanced whitespace, elegant typography and consistent rhythm create a polished feel.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Effortless performance</h3>
+      <p>Pure CSS, lightweight structure, and smooth transitions for a fast & fluid experience.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎨</div>
+      <h3>Customizable vibe</h3>
+      <p>Built with flexibility in mind — colors, cards, and modules can be adapted to your brand.</p>
+    </div>
+  </div>
+
+  <!-- showcase / gallery -->
+  <div class="showcase">
+    <h2 class="section-title"><span>✦ recent inspirations</span></h2>
+    <div class="cards-grid">
+      <div class="showcase-item">
+        <div class="img-placeholder">🌄</div>
+        <div class="info">
+          <h4>Mountain echoes</h4>
+          <p>Serene landscapes & visual poetry</p>
+        </div>
+      </div>
+      <div class="showcase-item">
+        <div class="img-placeholder">🪴</div>
+        <div class="info">
+          <h4>Botanical tales</h4>
+          <p>Organic forms and natural textures</p>
+        </div>
+      </div>
+      <div class="showcase-item">
+        <div class="img-placeholder">🌊</div>
+        <div class="info">
+          <h4>Coastal dreams</h4>
+          <p>Minimalist maritime narratives</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- testimonial section with modern card style -->
+  <div class="testimonial-section">
+    <h2 class="section-title" style="margin-bottom: 0.5rem;"><span>trusted by creators</span></h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <p>“Absolutely stunning design language. The attention to micro-interactions and modern layout makes browsing a delight.”</p>
+        <div class="author">
+          <div class="avatar">JD</div>
+          <div class="author-info">
+            <strong>Jordan Lee</strong>
+            <span>Creative director</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p>“Refreshingly clean and elegant. This page feels like a breath of fresh air in a cluttered web. Love the gradient hero section.”</p>
+        <div class="author">
+          <div class="avatar">MC</div>
+          <div class="author-info">
+            <strong>Maya Chen</strong>
+            <span>Product designer</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p>“Inspiring use of embedded CSS and responsive grid. Perfect template for a brand or personal portfolio launch.”</p>
+        <div class="author">
+          <div class="avatar">AR</div>
+          <div class="author-info">
+            <strong>Alex Rivera</strong>
+            <span>UX strategist</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- extra callout area / additional content -->
+  <div style="background: white; border-radius: 2rem; padding: 2rem; margin: 2rem 0 1rem; box-shadow: 0 10px 20px -8px rgba(0,0,0,0.05);">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem;">
+      <div>
+        <h3 style="font-size: 1.6rem; font-weight: 600;">Join the creative circle</h3>
+        <p style="color: #2c5a74; max-width: 500px;">Get updates on fresh design insights & early access to new modules.</p>
+      </div>
+      <div style="display: flex; gap: 0.8rem;">
+        <input type="email" placeholder="your@email.com" style="padding: 0.8rem 1.2rem; border-radius: 60px; border: 1px solid #cbd5e1; background: #f8fafc; font-family: inherit; width: 230px;">
+        <button class="btn btn-primary" style="padding: 0.8rem 1.5rem;">Subscribe</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer with subtle links -->
+  <div class="footer">
+    <p>© 2025 ethereal — timeless design, crafted with simplicity.</p>
+    <div class="social-icons">
+      <a href="#">Twitter</a>
+      <a href="#">Instagram</a>
+      <a href="#">GitHub</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
